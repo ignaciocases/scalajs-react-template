@@ -12,11 +12,11 @@ persistLauncher := true
 
 persistLauncher in Test := false
 
-val scalaJSReactVersion = "0.10.1"
+val scalaJSReactVersion = "0.11.1"
 
-val scalaCssVersion = "0.3.1"
+val scalaCssVersion = "0.4.1"
 
-val reactJSVersion = "0.14.2"
+val reactJSVersion = "0.14.8"
 
 
 libraryDependencies ++= Seq("com.github.japgolly.scalajs-react" %%% "core" % scalaJSReactVersion,
@@ -57,4 +57,9 @@ artifactPath in (Compile, fastOptJS) := ((crossTarget in (Compile, fastOptJS)).v
 
 
 scalacOptions += "-feature"
+
+import com.lihaoyi.workbench.Plugin._
+workbenchSettings
+bootSnippet := "ReactApp().main();"
+updateBrowsers <<= updateBrowsers.triggeredBy(fastOptJS in Compile)
 
